@@ -349,6 +349,11 @@ public class ShortcutDialogFragment extends DialogFragment  {
             final_title = "Unknown";
         }
 
+        // The launcher owns the pinned shortcut, so retain its title locally as well.
+        // WebViewActivity uses this value as the task title in the system Recents UI.
+        webapp.setShortcutTitle(final_title);
+        DataManager.getInstance().saveWebAppData();
+
         if (ShortcutManagerCompat.isRequestPinShortcutSupported(requireActivity())) {
 
             ShortcutInfoCompat pinShortcutInfo = new ShortcutInfoCompat.Builder(requireActivity(), final_title)

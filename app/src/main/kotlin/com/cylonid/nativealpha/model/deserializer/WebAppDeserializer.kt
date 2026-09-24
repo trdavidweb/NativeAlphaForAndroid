@@ -19,6 +19,7 @@ class WebAppDeserializer : JsonDeserializer<WebApp> {
         val obj = json.asJsonObject
         val webapp = Gson().fromJson(obj, WebApp::class.java)
         patchDataVersion1500(webapp, obj)
+        patchPageZoom(webapp, obj)
         return webapp
     }
 
@@ -52,5 +53,12 @@ class WebAppDeserializer : JsonDeserializer<WebApp> {
             webapp.adBlockSettings = Const.getDefaultAdBlockConfig()
         }
         webapp.adBlockSettings = webapp.adBlockSettings.take(8).toMutableList()
+    }
+
+    private fun patchPageZoom(webapp: WebApp, obj: JsonObject) {
+        if (!obj.has("pageZoom") || !obj.get("pageZoom").isJsonPrimitive) {
+            webapp.pageZoom = 120
+        }
+        webapp.pageZoom = webapp.pageZoom.coerceIn(50, 200)
     }
 }

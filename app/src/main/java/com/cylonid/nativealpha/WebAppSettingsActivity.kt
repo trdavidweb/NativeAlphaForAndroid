@@ -22,6 +22,7 @@ import com.cylonid.nativealpha.util.DateUtils.getHourMinFormat
 import com.cylonid.nativealpha.util.ProcessUtils.closeAllWebAppsAndProcesses
 import com.cylonid.nativealpha.util.Utility
 import java.util.Calendar
+import kotlin.math.roundToInt
 
 class WebAppSettingsActivity : ToolbarBaseActivity<WebappSettingsBinding>() {
     var webappID: Int = -1
@@ -56,6 +57,7 @@ class WebAppSettingsActivity : ToolbarBaseActivity<WebappSettingsBinding>() {
         setupPlusSettings()
         setupDesktopUserAgentHint()
         setupShortcutButton()
+        setupPageZoomSlider(modifiedWebapp)
         setupSwitchListeners(webapp!!)
 
     }
@@ -141,6 +143,15 @@ class WebAppSettingsActivity : ToolbarBaseActivity<WebappSettingsBinding>() {
         }
     }
 
+    private fun setupPageZoomSlider(modifiedWebapp: WebApp) {
+        binding.sliderPageZoom.value = modifiedWebapp.pageZoom.toFloat()
+        binding.textPageZoomValue.text = getString(R.string.page_zoom_percent, modifiedWebapp.pageZoom)
+        binding.sliderPageZoom.addOnChangeListener { _, value, _ ->
+            modifiedWebapp.pageZoom = value.roundToInt()
+            binding.textPageZoomValue.text = getString(R.string.page_zoom_percent, modifiedWebapp.pageZoom)
+        }
+    }
+
     private fun setupPlusSettings() {
         if (!BuildConfig.FLAVOR.contains("extended")) {
             binding.sectionDarkmode.visibility = View.GONE
@@ -180,5 +191,4 @@ class WebAppSettingsActivity : ToolbarBaseActivity<WebappSettingsBinding>() {
         setToolbarTitle(getString(R.string.global_web_app_settings))
     }
 }
-
 

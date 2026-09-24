@@ -3,6 +3,7 @@ package com.cylonid.nativealpha;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.app.ActivityManager;
 import android.app.DownloadManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -97,7 +98,6 @@ public class WebViewActivity extends AppCompatActivity implements EasyPermission
     private static final int NONE = 0;
     private static final int SWIPE = 1;
     private static final int TRESHOLD = 100;
-    private static final int PAGE_TEXT_ZOOM_PERCENT = 120;
     private static final int WEBVIEW_SURFACE_COLOR = 0xFFF7F7F7;
     int webappID = -1;
     private WebView wv;
@@ -136,10 +136,27 @@ public class WebViewActivity extends AppCompatActivity implements EasyPermission
             // Toast is shown in getWebApp method
             finish();
         } else {
+            setRecentsTitle();
             if(webapp.isBiometricProtection()) {
                 new BiometricPromptHelper(WebViewActivity.this).showPrompt(() -> setupWebView(), () -> finish(), getString(R.string.bioprompt_restricted_webapp));
             }
             setupWebView();
+        }
+    }
+
+    private void setRecentsTitle() {
+        String shortcutTitle = webapp.getShortcutTitle();
+        String taskTitle = shortcutTitle == null || shortcutTitle.isEmpty()
+                ? webapp.getTitle()
+                : shortcutTitle;
+
+        setTitle(taskTitle);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            setTaskDescription(new ActivityManager.TaskDescription.Builder()
+                    .setLabel(taskTitle)
+                    .build());
+        } else {
+            setTaskDescription(new ActivityManager.TaskDescription(taskTitle));
         }
     }
 
@@ -223,7 +240,7 @@ public class WebViewActivity extends AppCompatActivity implements EasyPermission
         // Reset to WebView's viewport-derived default instead of retaining a forced page scale.
         wv.setInitialScale(0);
         // Enlarge readable page content while preserving the responsive page width.
-        wv.getSettings().setTextZoom(PAGE_TEXT_ZOOM_PERCENT);
+        wv.getSettings().setTextZoom(webapp.getPageZoom());
 //        wv.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         this.setDarkModeIfNeeded();
 

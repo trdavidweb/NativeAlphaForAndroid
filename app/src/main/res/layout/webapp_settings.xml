@@ -506,6 +506,33 @@
                                 android:checked="@={webapp.openUrlExternal}"
                                 android:text="@string/open_external_links_in_browser_app" />
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/default_page_zoom" />
+
+                                <TextView
+                                    android:id="@+id/textPageZoomValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                            </LinearLayout>
+
+                            <com.google.android.material.slider.Slider
+                                android:id="@+id/sliderPageZoom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:stepSize="10"
+                                android:valueFrom="50"
+                                android:valueTo="200"
+                                app:labelBehavior="floating" />
+
                             <com.google.android.material.materialswitch.MaterialSwitch
                                 android:id="@+id/switchEnableZoom"
                                 android:layout_width="match_parent"

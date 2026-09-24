@@ -17,6 +17,7 @@ data class AdblockConfig(val label: String, val value: String)
 
 data class WebApp(var baseUrl: String, val ID: Int) {
     var title: String
+    var shortcutTitle: String? = null
     var isActiveEntry = true
     var isOverrideGlobalSettings = true
 
@@ -51,6 +52,7 @@ data class WebApp(var baseUrl: String, val ID: Int) {
     var isKeepAwake = false
     var isCameraPermission = false
     var isMicrophonePermission = false
+    var pageZoom = 120
     var isEnableZooming = false
     var isBiometricProtection = false
     var isAllowMediaPlaybackInBackground = false
@@ -73,6 +75,7 @@ data class WebApp(var baseUrl: String, val ID: Int) {
 
     constructor(other: WebApp) : this(other.baseUrl, other.ID) {
         title = other.title
+        shortcutTitle = other.shortcutTitle
         isOverrideGlobalSettings = other.isOverrideGlobalSettings
         containerId = other.containerId
         isUseContainer = other.isUseContainer
@@ -113,6 +116,7 @@ data class WebApp(var baseUrl: String, val ID: Int) {
         isKeepAwake = other.isKeepAwake
         isCameraPermission = other.isCameraPermission
         isMicrophonePermission = other.isMicrophonePermission
+        pageZoom = other.pageZoom
         isEnableZooming = other.isEnableZooming
         isBiometricProtection = other.isBiometricProtection
         isAllowMediaPlaybackInBackground = other.isAllowMediaPlaybackInBackground

@@ -165,6 +165,8 @@
     <string name="no_url_entered">Please enter an URL.</string>
     <string name="scroll_to_bottom">Please scroll to the bottom.</string>
     <string name="always_show_software_buttons">Always show software navigation buttons</string>
+    <string name="default_page_zoom">Default page zoom</string>
+    <string name="page_zoom_percent">%1$d%%</string>
     <string name="use_standard_context_menu_temporarily">Temporarily use standard context menu</string>
     <string name="use_standard_context_menu_permanently">Use standard context menu</string>
     <string name="adblock_config">Adblock settings</string>
