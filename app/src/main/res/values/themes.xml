@@ -55,7 +55,9 @@
     </style>
 
     <style name="AppTheme.WebView">
-        <item name="android:statusBarColor">#373737</item>
+        <item name="android:statusBarColor">#F7F7F7</item>
+        <item name="android:windowBackground">#F7F7F7</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
 

@@ -97,6 +97,8 @@ public class WebViewActivity extends AppCompatActivity implements EasyPermission
     private static final int NONE = 0;
     private static final int SWIPE = 1;
     private static final int TRESHOLD = 100;
+    private static final int PAGE_TEXT_ZOOM_PERCENT = 120;
+    private static final int WEBVIEW_SURFACE_COLOR = 0xFFF7F7F7;
     int webappID = -1;
     private WebView wv;
     private ProgressBar progressBar;
@@ -196,6 +198,8 @@ public class WebViewActivity extends AppCompatActivity implements EasyPermission
             });
         }
 
+        wv.setBackgroundColor(WEBVIEW_SURFACE_COLOR);
+
         String fieldName = Stream.of(WebViewActivity.class.getDeclaredFields()).filter(f -> f.getType() == WebView.class).findFirst().orElseThrow(null).getName();
         String uaString = wv.getSettings().getUserAgentString().replace("; " + fieldName, "");
         wv.getSettings().setUserAgentString(uaString);
@@ -216,6 +220,10 @@ public class WebViewActivity extends AppCompatActivity implements EasyPermission
         wv.getSettings().setDatabaseEnabled(true);
         wv.getSettings().setAllowFileAccess(true);
         wv.getSettings().setBlockNetworkLoads(false);
+        // Reset to WebView's viewport-derived default instead of retaining a forced page scale.
+        wv.setInitialScale(0);
+        // Enlarge readable page content while preserving the responsive page width.
+        wv.getSettings().setTextZoom(PAGE_TEXT_ZOOM_PERCENT);
 //        wv.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         this.setDarkModeIfNeeded();
 
@@ -621,6 +629,8 @@ public class WebViewActivity extends AppCompatActivity implements EasyPermission
 
     }
     private void hideSystemBars() {
+        getWindow().setStatusBarColor(WEBVIEW_SURFACE_COLOR);
+        getWindow().setNavigationBarColor(WEBVIEW_SURFACE_COLOR);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             getWindow().setDecorFitsSystemWindows(false);
             WindowInsetsController controller = getWindow().getInsetsController();
@@ -1015,5 +1025,3 @@ public class WebViewActivity extends AppCompatActivity implements EasyPermission
         }
     }
 }
-
-
