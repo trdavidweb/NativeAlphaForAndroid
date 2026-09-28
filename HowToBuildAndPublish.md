@@ -30,6 +30,15 @@ the keystore or the environment file.
 
 ## Build and verify
 
+Open this project directory in VS Code and select a configuration from
+**Run and Debug**. **Build Full Release** cleans Gradle outputs and builds
+signed release artifacts; **Build Release** builds them incrementally.
+**Install on Android** installs the existing signed release APK. Both
+builds use the same private signing key and verify the APK signature.
+The key is created only once per project, not on each build or session.
+Set `ANDROID_SERIAL` if more than one device is connected.
+Build progress appears in the VS Code **Terminal** tab.
+
 The `extendedGithub` flavor has the public `com.cylonid.nativealpha` package
 name. The build creates ABI-specific APKs and a universal APK.
 
