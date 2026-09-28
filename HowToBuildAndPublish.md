@@ -37,7 +37,9 @@ signed release artifacts; **Build Release** builds them incrementally.
 builds use the same private signing key and verify the APK signature.
 The key is created only once per project, not on each build or session.
 Set `ANDROID_SERIAL` if more than one device is connected.
-Build progress appears in the VS Code **Terminal** tab.
+Build progress appears in the VS Code **Terminal** tab. The VS Code
+launcher needs Node.js on `PATH` or in `$HOME/.local/nodejs/node-v*/bin`.
+Its process ends with the build while the terminal keeps the output.
 
 The `extendedGithub` flavor has the public `com.cylonid.nativealpha` package
 name. The build creates ABI-specific APKs and a universal APK.

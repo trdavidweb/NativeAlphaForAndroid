@@ -3,26 +3,44 @@
   "configurations": [
     {
       "name": "Build Full Release",
-      "type": "node-terminal",
+      "type": "node",
       "request": "launch",
-      "command": "bash \"${workspaceFolder}/scripts/android-vscode.sh\" full; exit $?",
+      "runtimeExecutable": "${workspaceFolder}/scripts/vscode-launch.sh",
+      "program": "${workspaceFolder}/scripts/vscode-launch.mjs",
+      "args": [
+        "full"
+      ],
       "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
       "autoAttachChildProcesses": false
     },
     {
       "name": "Build Release",
-      "type": "node-terminal",
+      "type": "node",
       "request": "launch",
-      "command": "bash \"${workspaceFolder}/scripts/android-vscode.sh\" release; exit $?",
+      "runtimeExecutable": "${workspaceFolder}/scripts/vscode-launch.sh",
+      "program": "${workspaceFolder}/scripts/vscode-launch.mjs",
+      "args": [
+        "release"
+      ],
       "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
       "autoAttachChildProcesses": false
     },
     {
       "name": "Install on Android",
-      "type": "node-terminal",
+      "type": "node",
       "request": "launch",
-      "command": "bash \"${workspaceFolder}/scripts/android-vscode.sh\" install; exit $?",
+      "runtimeExecutable": "${workspaceFolder}/scripts/vscode-launch.sh",
+      "program": "${workspaceFolder}/scripts/vscode-launch.mjs",
+      "args": [
+        "install"
+      ],
       "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
       "autoAttachChildProcesses": false
     }
   ]
