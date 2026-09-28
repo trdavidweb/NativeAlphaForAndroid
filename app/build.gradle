@@ -3,6 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.mikepenz.aboutlibraries.plugin'
 
+def releaseStoreFile = System.getenv('NATIVEALPHA_ANDROID_STORE_FILE')
+def releaseStorePassword = System.getenv('NATIVEALPHA_ANDROID_STORE_PASSWORD')
+def releaseKeyAlias = System.getenv('NATIVEALPHA_ANDROID_KEY_ALIAS')
+def releaseKeyPassword = System.getenv('NATIVEALPHA_ANDROID_KEY_PASSWORD')
+
 aboutLibraries {
     excludeFields = ["generated"]
 }
@@ -69,10 +74,17 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
+    signingConfigs {
+        release {
+            storeFile file(releaseStoreFile ?: 'missing-release-keystore')
+            storePassword releaseStorePassword ?: ''
+            keyAlias releaseKeyAlias ?: ''
+            keyPassword releaseKeyPassword ?: ''
+        }
+    }
     buildTypes {
         release {
-            // Deliberately use the debug key for locally distributable release builds.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

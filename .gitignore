@@ -12,6 +12,10 @@
 /captures
 .externalNativeBuild
 .cxx
+*.jks
+*.keystore
+signing.env
+/.idea/runConfigurations.xml
 app/release/**
 app/standard/**
 app/extended/**
