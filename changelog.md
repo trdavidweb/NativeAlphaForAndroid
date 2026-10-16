@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Unreleased
+* Repository maintenance: expanded Git ignore rules for Kotlin caches, generated module build output, Android Studio transient files, and local release artifacts.
+* Removed the redundant module-level Git ignore file; its build-output rule is now covered centrally.
+
 ## Version 0.85.1
 * Fixed an issue where the app could not restore a backup properly
 * Fixed an issue where an unavailable favicon led to a crash during favicon retrieval 

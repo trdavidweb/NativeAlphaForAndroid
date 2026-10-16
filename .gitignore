@@ -1,22 +1,36 @@
-*.iml
-.gradle
+# Build tools and generated output
+/.gradle/
+/.kotlin/
+**/build/
+
+# Local machine configuration
 /local.properties
-/.idea/caches
-/.idea/libraries
+
+# Android Studio transient files
+*.iml
+/.idea/caches/
+/.idea/libraries/
 /.idea/modules.xml
-/.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+/.idea/deploymentTargetDropDown.xml
+/.idea/runConfigurations.xml
+
+# Native build artifacts
+/.externalNativeBuild/
+/.cxx/
+/captures/
+
+# Signing credentials
 *.jks
 *.keystore
 signing.env
-/.idea/runConfigurations.xml
-app/release/**
-app/standard/**
-app/extended/**
-app/extendedGithub/**
+
+# Locally generated release artifacts
+/app/release/
+/app/standard/
+/app/extended/
+/app/extendedGithub/
+
+# Operating system files
+.DS_Store
